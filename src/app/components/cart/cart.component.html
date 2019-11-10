@@ -1,0 +1,30 @@
+<div class="padding">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qtt</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of products | async">
+      <th scope="row">{{ item.id }}</th>
+      <td>
+        {{ item.name }}
+      </td>
+      <td>{{ item.price | number }}</td>
+      <td>{{ item.amount | number }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm"
+                type="button"
+                (click)="remove(item.id)">
+          Remove
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

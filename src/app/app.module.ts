@@ -6,17 +6,24 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './store/modules/cart/reducer';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    StoreModule.forRoot({
+      products: cartReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

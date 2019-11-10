@@ -5,12 +5,12 @@
       <h5 class="card-title">
         {{item.name}}
       </h5>
-      <a href="#" class="btn btn-primary">
+      <a (click)="add(item)"
+         class="btn btn-primary">
         Add
-      </a>
-      &nbsp;
-      <a href="#" class="btn btn-danger">
-        Remove
+        <span>
+          {{amount[item.id] || 0}}
+        </span>
       </a>
     </div>
   </div>

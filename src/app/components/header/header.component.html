@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light">
-  <span class="navbar-text">
-    Cart: 0
-  </span>
+  <a class="navbar-text" routerLink="/cart">
+    Cart: {{(products | async)?.length}}
+  </a>
 </nav>

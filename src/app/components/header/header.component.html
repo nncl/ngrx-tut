@@ -2,4 +2,15 @@
   <a class="navbar-text" routerLink="/cart">
     Cart: {{(products | async)?.length}}
   </a>
+
+  <a class="navbar-text" *ngIf="(user | async)?.email">
+    User: {{(user | async)?.email}}
+  </a>
+
+  <button class="btn btn-outline-danger my-2 my-sm-0"
+          type="button"
+          *ngIf="(user | async)?.email"
+          (click)="signout()">
+    Logout
+  </button>
 </nav>

@@ -10,13 +10,17 @@ import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx
 import { cartReducer } from './store/modules/cart/reducer';
 import { CartComponent } from './components/cart/cart.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { FormComponent } from './components/form/form.component';
+import { FormsModule } from '@angular/forms';
+import { userReducer } from './store/modules/user/reducer';
 
 const reducers: ActionReducerMap<any> = {
   products: cartReducer,
+  user: userReducer,
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({keys: ['products'], rehydrate: true})(reducer);
+  return localStorageSync({keys: ['products', 'user'], rehydrate: true})(reducer);
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
@@ -26,13 +30,15 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    StoreModule.forRoot(reducers, {metaReducers})
+    StoreModule.forRoot(reducers, {metaReducers}),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

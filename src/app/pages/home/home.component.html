@@ -1,19 +1,20 @@
 <div class="padding">
   <app-form></app-form>
 
-  <div class="card" *ngFor="let item of items">
-    <div class="card-body">
-      <h5 class="card-title">
-        {{item.name}}
-      </h5>
-      <a (click)="add(item)"
-         class="btn btn-primary">
-        Add
-        <span>
+  <swiper [config]="config">
+    <div class="card" *ngFor="let item of items">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{item.name}}
+        </h5>
+        <a (click)="add(item)"
+           class="btn btn-primary">
+          Add
+          <span>
           {{amount[item.id] || 0}}
         </span>
-      </a>
+        </a>
+      </div>
     </div>
-  </div>
-
+  </swiper>
 </div>

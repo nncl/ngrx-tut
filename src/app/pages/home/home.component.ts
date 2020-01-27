@@ -4,6 +4,7 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { Observable, Subscription } from 'rxjs';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   products: Observable<IProduct[]>;
   productsSubscription: Subscription;
   amount: any;
+  config: SwiperConfigInterface = {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    breakpoints: {
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      }
+    }
+  };
 
   constructor(private store: Store<AppState>) {
     this.products = store.select('products');

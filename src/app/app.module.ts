@@ -13,6 +13,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { FormComponent } from './components/form/form.component';
 import { FormsModule } from '@angular/forms';
 import { userReducer } from './store/modules/user/reducer';
+import { SWIPER_CONFIG, SwiperConfigInterface, SwiperModule } from 'ngx-swiper-wrapper';
 
 const reducers: ActionReducerMap<any> = {
   products: cartReducer,
@@ -24,6 +25,12 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 }
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto',
+  breakpointsInverse: true,
+};
 
 @NgModule({
   declarations: [
@@ -38,9 +45,15 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppRoutingModule,
     NgbModule,
     StoreModule.forRoot(reducers, {metaReducers}),
-    FormsModule
+    FormsModule,
+    SwiperModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

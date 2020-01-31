@@ -14,6 +14,13 @@ import { FormComponent } from './components/form/form.component';
 import { FormsModule } from '@angular/forms';
 import { userReducer } from './store/modules/user/reducer';
 import { SWIPER_CONFIG, SwiperConfigInterface, SwiperModule } from 'ngx-swiper-wrapper';
+import { SocialsComponent } from './components/socials/socials.component';
+import {
+  AuthServiceConfig,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialLoginModule
+} from 'angularx-social-login';
 
 const reducers: ActionReducerMap<any> = {
   products: cartReducer,
@@ -32,13 +39,29 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   breakpointsInverse: true,
 };
 
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
     CartComponent,
-    FormComponent
+    FormComponent,
+    SocialsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,12 +69,17 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    SocialLoginModule
   ],
   providers: [
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG
+    },
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
     }
   ],
   bootstrap: [AppComponent]

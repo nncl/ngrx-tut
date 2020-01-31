@@ -1,0 +1,20 @@
+<div class="socials">
+  <button type="button"
+          class="btn-block btn-lg btn-outline-primary"
+          (click)="sign('facebook')">
+    Facebook
+  </button>
+
+  <button type="button"
+          class="btn-block btn-lg btn-outline-secondary"
+          (click)="sign('google')">
+    Google
+  </button>
+
+  <button type="button"
+          class="btn-block btn-danger"
+          *ngIf="accessToken"
+          (click)="signOut()">
+    Logout
+  </button>
+</div>
